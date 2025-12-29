@@ -1,12 +1,12 @@
--- Global settings to toggle
+-- Cleaned version for iOS/Delta
 getgenv().AutoTrainHit = false
 getgenv().GodCollision = true
 
--- 1. Force Fly Collision (Ghost Mode)
 task.spawn(function()
-    while task.wait() do
+    while task.wait(1) do
         if getgenv().GodCollision then
-            local char = game.Players.LocalPlayer.Character
+            local p = game.Players.LocalPlayer
+            local char = p.Character
             if char then
                 local hrp = char:FindFirstChild("HumanoidRootPart")
                 local torso = char:FindFirstChild("Torso") or char:FindFirstChild("UpperTorso")
@@ -17,27 +17,4 @@ task.spawn(function()
     end
 end)
 
--- 2. Train Event Spammer (If it gives rewards or triggers events)
-task.spawn(function()
-    while task.wait(0.5) do
-        if getgenv().AutoTrainHit then
-            game.ReplicatedStorage.TrainEvent:FireServer("Hit")
-        end
-    end
-end)
-
--- 3. Grave ESP (Highlighting "Dirt" graves)
-for _, v in ipairs(workspace.GraveYard.Graves:GetDescendants()) do
-    if v:GetAttribute("Dirt") then
-        local b = Instance.new("BoxHandleAdornment")
-        b.Size = Vector3.new(4, 4, 4)
-        b.AlwaysOnTop = true
-        b.ZIndex = 10
-        b.Adornee = v
-        b.Color3 = Color3.fromRGB(255, 0, 0)
-        b.Transparency = 0.5
-        b.Parent = v
-    end
-end
-
-print("Environmental Exploits Loaded.")
+print("Script cleaned and loaded.")
